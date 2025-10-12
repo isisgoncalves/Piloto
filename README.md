@@ -1,6 +1,5 @@
 # Sistema de Gerenciamento de Eventos e Workshops
 
-![Status](https://img.shields.io/badge/Status-AC2%20Concluído-success)
 ![Linguagem](https://img.shields.io/badge/Backend-FastAPI-009688)
 ![Frontend](https://img.shields.io/badge/Frontend-React-61dafb)
 ![Database](https://img.shields.io/badge/Database-SQLite-003b57)
