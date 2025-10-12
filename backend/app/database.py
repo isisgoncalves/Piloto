@@ -1,22 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
-import os
-import pyodbc
 
-load_dotenv()
-
-# Configurações do SQL Server
-SERVER = os.getenv("SQL_SERVER", "localhost\\SQLEXPRESS")
-DATABASE = os.getenv("SQL_DATABASE", "eventos_db")
-
-# String de conexão para SQL Server usando Windows Authentication
-SQLALCHEMY_DATABASE_URL = f"mssql+pyodbc://{SERVER}/{DATABASE}?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
+# Usando SQLite em memória para simplificar
+SQLALCHEMY_DATABASE_URL = "sqlite:///./events.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
-    fast_executemany=True
+    connect_args={"check_same_thread": False}
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

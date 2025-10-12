@@ -16,8 +16,30 @@ def create_event(event: event_schema.EventCreate, db: Session = Depends(get_db))
     return db_event
 
 @router.get("/events/", response_model=List[event_schema.Event])
-def read_events(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    events = db.query(event_model.Event).offset(skip).limit(limit).all()
+def read_events(
+    skip: int = 0, 
+    limit: int = 10, 
+    title: str = None,
+    start_date: str = None,
+    end_date: str = None,
+    location: str = None,
+    db: Session = Depends(get_db)
+):
+    query = db.query(event_model.Event)
+    
+    if title:
+        query = query.filter(event_model.Event.title.ilike(f"%{title}%"))
+    
+    if start_date:
+        query = query.filter(event_model.Event.date >= start_date)
+    
+    if end_date:
+        query = query.filter(event_model.Event.date <= end_date)
+    
+    if location:
+        query = query.filter(event_model.Event.location.ilike(f"%{location}%"))
+    
+    events = query.offset(skip).limit(limit).all()
     return events
 
 @router.get("/events/{event_id}", response_model=event_schema.Event)

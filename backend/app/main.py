@@ -11,7 +11,7 @@ app = FastAPI(title="Eventos API")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Em produção, especifique os domínios permitidos
+    allow_origins=["*"],  # Permitir todas as origens temporariamente para teste
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

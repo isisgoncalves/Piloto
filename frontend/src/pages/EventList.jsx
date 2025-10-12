@@ -8,7 +8,8 @@ import {
     Button
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { EventService } from '../../services/api';
+import { EventService } from '../services/api';
+import EventFilters from '../components/EventFilters';
 
 export default function EventList() {
     const [events, setEvents] = useState([]);
@@ -17,13 +18,17 @@ export default function EventList() {
         loadEvents();
     }, []);
 
-    const loadEvents = async () => {
+    const loadEvents = async (filters = {}) => {
         try {
-            const data = await EventService.getEvents();
+            const data = await EventService.getEvents(filters);
             setEvents(data);
         } catch (error) {
             console.error('Erro ao carregar eventos:', error);
         }
+    };
+
+    const handleFilter = (filters) => {
+        loadEvents(filters);
     };
 
     return (
@@ -39,6 +44,7 @@ export default function EventList() {
                     Criar Novo Evento
                 </Button>
             </div>
+            <EventFilters onFilter={handleFilter} />
             <Grid container spacing={3}>
                 {events.map((event) => (
                     <Grid item xs={12} sm={6} md={4} key={event.id}>

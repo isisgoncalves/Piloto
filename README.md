@@ -83,9 +83,20 @@ Documentação Swagger UI: `http://localhost:8000/docs`
 ## Cronograma de Entregas
 
 - [x] AC1 - 14/09/2025 (Concluído)
+  - Implementação do CRUD básico de eventos
+  - Estruturação inicial do projeto
+
 - [ ] AC2 - 12/10/2025 (Em andamento)
-- [ ] AC3 - 09/11/2025
-- [ ] Entrega Final - 30/11/2025
+  - Implementação de filtros de busca de eventos
+  - Interface de pesquisa e filtros no frontend
+
+- [ ] AC3 - 09/11/2025 (Planejado)
+  - Sistema de autenticação de usuários
+  - Configuração final do banco de dados
+
+- [ ] Entrega Final - 30/11/2025 (Planejado)
+  - Validações de formulários
+  - Melhorias gerais e polimentos
 
 ## Links Importantes
 
