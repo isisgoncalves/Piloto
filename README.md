@@ -4,10 +4,20 @@ Este é um sistema de gerenciamento de eventos e workshops desenvolvido como pro
 
 ## Sobre o Projeto
 
-O sistema está sendo desenvolvido com uma arquitetura em 3 camadas:
-- Frontend (React + Vite)
-- Backend (FastAPI)
-- Banco de Dados (SQLite)
+Este projeto implementa um sistema completo de gerenciamento de eventos e workshops, desenvolvido como trabalho acadêmico da disciplina de Projeto de Software. 
+
+### Arquitetura em 3 Camadas:
+- **Frontend**: React + Vite + Material-UI
+- **Backend**: FastAPI + SQLAlchemy + Pydantic  
+- **Banco de Dados**: SQLite (desenvolvimento) / SQL Server (produção)
+
+### Funcionalidades Implementadas:
+- ✅ CRUD completo de eventos
+- ✅ Sistema de filtros e busca avançada
+- ✅ API REST documentada automaticamente
+- ✅ Validação de dados robusta
+- 🔄 Interface de usuário (em desenvolvimento)
+- 🔄 Sistema de autenticação (próxima entrega)
 
 ## Estrutura do Projeto
 
@@ -75,31 +85,48 @@ npm install
 npm run dev
 ```
 
-## Endpoints da API
+## API REST e Documentação
 
-A API estará disponível em `http://localhost:8000`
-Documentação Swagger UI: `http://localhost:8000/docs`
+### Endpoints Disponíveis:
+- `POST /api/events/` - Criar novo evento
+- `GET /api/events/` - Listar eventos com filtros opcionais
+- `GET /api/events/{id}` - Buscar evento específico por ID
+
+### Filtros Implementados (AC2):
+- **Título**: Busca parcial case-insensitive
+- **Localização**: Busca parcial case-insensitive  
+- **Período**: Filtro por data inicial e/ou final
+- **Combinados**: Todos os filtros podem ser usados simultaneamente
+
+### Acesso:
+- **API Base**: `http://localhost:8000`
+- **Documentação Interativa**: `http://localhost:8000/docs` (Swagger UI)
+- **Documentação Alternativa**: `http://localhost:8000/redoc`
 
 ## Cronograma de Entregas
 
-- [x] AC1 - 14/09/2025 (Concluído)
-  - Implementação do CRUD básico de eventos
-  - Estruturação inicial do projeto
+- [x] **AC1 - 14/09/2025** (Concluído)
+  - Estrutura básica do projeto (Frontend/Backend/Database)
+  - CRUD completo de eventos via API REST
+  - Configuração do ambiente de desenvolvimento
+  - Documentação inicial e repositório GitHub
 
-- [x] AC2 - 12/10/2025 (Concluído)
-  - ✅ Sistema de filtros de busca completo no backend
-  - ✅ Filtros por título, data (período) e localização
-  - ✅ API REST documentada com Swagger UI
-  - ✅ Migração para SQLite para maior compatibilidade
-  - ✅ Componentes React para filtros desenvolvidos
+- [x] **AC2 - 12/10/2025** (Concluído)
+  - Sistema de filtros de busca de eventos
+  - Filtros por título, localização e período de datas
+  - API REST com documentação automática (Swagger UI)
+  - Migração para banco SQLite para maior compatibilidade
+  - Testes funcionais completos via interface web
 
-- [ ] AC3 - 09/11/2025 (Planejado)
-  - Sistema de autenticação de usuários
-  - Configuração final do banco de dados
+- [ ] **AC3 - 09/11/2025** (Próxima Entrega)
+  - Sistema de autenticação e autorização de usuários
+  - Interface frontend completa e integrada
+  - Validações avançadas de formulários
 
-- [ ] Entrega Final - 30/11/2025 (Planejado)
-  - Validações de formulários
-  - Melhorias gerais e polimentos
+- [ ] **Entrega Final - 30/11/2025** (Projeto Completo)
+  - Sistema completo integrado (Frontend + Backend + Database)
+  - Deploy e documentação final
+  - Apresentação do projeto concluído
 
 ## Links Importantes
 
