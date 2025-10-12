@@ -7,7 +7,7 @@ Este é um sistema de gerenciamento de eventos e workshops desenvolvido como pro
 O sistema está sendo desenvolvido com uma arquitetura em 3 camadas:
 - Frontend (React + Vite)
 - Backend (FastAPI)
-- Banco de Dados (SQL Server)
+- Banco de Dados (SQLite)
 
 ## Estrutura do Projeto
 
@@ -86,9 +86,12 @@ Documentação Swagger UI: `http://localhost:8000/docs`
   - Implementação do CRUD básico de eventos
   - Estruturação inicial do projeto
 
-- [ ] AC2 - 12/10/2025 (Em andamento)
-  - Implementação de filtros de busca de eventos
-  - Interface de pesquisa e filtros no frontend
+- [x] AC2 - 12/10/2025 (Concluído)
+  - ✅ Sistema de filtros de busca completo no backend
+  - ✅ Filtros por título, data (período) e localização
+  - ✅ API REST documentada com Swagger UI
+  - ✅ Migração para SQLite para maior compatibilidade
+  - ✅ Componentes React para filtros desenvolvidos
 
 - [ ] AC3 - 09/11/2025 (Planejado)
   - Sistema de autenticação de usuários
