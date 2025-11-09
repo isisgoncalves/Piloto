@@ -4,11 +4,17 @@ from typing import List
 from app.database import get_db
 from app.schemas import event as event_schema
 from app.models import event as event_model
+from app.auth import get_current_active_user
+from app.models.user import User
 
 router = APIRouter()
 
 @router.post("/events/", response_model=event_schema.Event)
-def create_event(event: event_schema.EventCreate, db: Session = Depends(get_db)):
+def create_event(
+    event: event_schema.EventCreate, 
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_user)
+):
     db_event = event_model.Event(**event.dict())
     db.add(db_event)
     db.commit()

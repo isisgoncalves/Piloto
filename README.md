@@ -18,10 +18,13 @@ Este projeto implementa um sistema completo de gerenciamento de eventos e worksh
 ### Funcionalidades Implementadas:
 - ✅ CRUD completo de eventos
 - ✅ Sistema de filtros e busca avançada
+- ✅ Sistema de autenticação JWT
+- ✅ Registro e login de usuários
+- ✅ Proteção de rotas com autenticação
 - ✅ API REST documentada automaticamente
 - ✅ Validação de dados robusta
 - 🔄 Interface de usuário (em desenvolvimento)
-- 🔄 Sistema de autenticação (próxima entrega)
+- 🔄 Validações avançadas de formulários
 
 ## Estrutura do Projeto
 
@@ -73,8 +76,20 @@ SQL_DATABASE=eventos_db
 
 5. Iniciar o servidor de desenvolvimento:
 ```bash
+# Ativar ambiente virtual
+venv\Scripts\activate
+
+# Navegar para pasta backend
+cd backend
+
+# Iniciar servidor (IMPORTANTE: usar Python 3.12+)
 uvicorn app.main:app --reload
 ```
+
+**⚠️ Requisitos Importantes:**
+- **Python 3.12+**
+- **SQL Server**
+- **Todas as dependências do requirements.txt instaladas**
 
 ### Frontend
 
@@ -92,45 +107,141 @@ npm run dev
 ## API REST e Documentação
 
 ### Endpoints Disponíveis:
-- `POST /api/events/` - Criar novo evento
+
+**Eventos:**
 - `GET /api/events/` - Listar eventos com filtros opcionais
+- `POST /api/events/` - Criar novo evento (requer autenticação)
 - `GET /api/events/{id}` - Buscar evento específico por ID
 
-### Filtros Implementados (AC2):
+**Autenticação:**
+- `POST /api/auth/register` - Registrar novo usuário
+- `POST /api/auth/login` - Login de usuário (retorna JWT token)
+- `GET /api/auth/me` - Obter dados do usuário atual (requer autenticação)
+
+### Filtros Implementados:
 - **Título**: Busca parcial case-insensitive
 - **Localização**: Busca parcial case-insensitive  
 - **Período**: Filtro por data inicial e/ou final
 - **Combinados**: Todos os filtros podem ser usados simultaneamente
 
 ### Acesso:
-- **API Base**: `http://localhost:8000`
-- **Documentação Interativa**: `http://localhost:8000/docs` (Swagger UI)
-- **Documentação Alternativa**: `http://localhost:8000/redoc`
+- **API Base**: `http://127.0.0.1:8000`
+- **Documentação Interativa**: `http://127.0.0.1:8000/docs` (Swagger UI)
+- **Documentação Alternativa**: `http://127.0.0.1:8000/redoc`
+
+### Detalhamento das Entregas:
+
+#### **AC1 - CRUD Completo de Eventos:**
+
+**✅ Funcionalidades Implementadas:**
+1. **Criar Evento** - `POST /api/events/`
+   - Validação de dados com Pydantic
+   - Persistência no banco SQLite/SQL Server
+   - Retorno do evento criado com ID
+
+2. **Listar Eventos** - `GET /api/events/`
+   - Paginação com skip/limit
+   - Listagem completa de eventos
+   - Formato JSON padronizado
+
+3. **Buscar Evento** - `GET /api/events/{id}`
+   - Busca por ID específico
+   - Tratamento de erro 404
+   - Retorno de dados completos
+
+**🔧 Tecnologias AC1:**
+- **FastAPI** para API REST
+- **SQLAlchemy** para ORM
+- **Pydantic** para validação
+- **SQLite** para desenvolvimento
+
+#### **AC2 - Sistema de Filtros e Busca:**
+
+**✅ Filtros Implementados:**
+1. **Filtro por Título** - `?title=texto`
+   - Busca parcial case-insensitive
+   - Operador ILIKE do SQL
+   - Combinável com outros filtros
+
+2. **Filtro por Localização** - `?location=local`
+   - Busca parcial case-insensitive
+   - Localização em qualquer parte do texto
+   - Flexibilidade de busca
+
+3. **Filtro por Período** - `?start_date=2025-01-01&end_date=2025-12-31`
+   - Filtro por data inicial e/ou final
+   - Formato ISO de datas
+   - Consultas otimizadas
+
+4. **Filtros Combinados**
+   - Todos os filtros funcionam simultaneamente
+   - Lógica AND entre condições
+   - Performance otimizada
+
+**🔧 Tecnologias AC2:**
+- **SQLAlchemy Query Builder** para filtros
+- **Swagger UI** para documentação interativa
+- **Validação automática** de parâmetros
+- **Testes funcionais** via interface web
+
+#### **AC3 - Sistema de Autenticação JWT:**
+
+**✅ Cenários Validados:**
+1. **Registro de Usuário** - `POST /api/auth/register`
+   - Criação de usuários com validação de email
+   - Hash seguro de senhas com bcrypt
+   - Retorno de dados do usuário criado
+
+2. **Login JWT** - `POST /api/auth/login`
+   - Autenticação com email e senha
+   - Geração de token JWT válido
+   - Token com expiração configurável (30 minutos)
+
+3. **Proteção de Rotas** - Middleware de Segurança
+   - Rotas protegidas retornam 401 sem token
+   - Verificação automática de autenticação
+   - Sistema de autorização funcionando
+
+**🔧 Tecnologias AC3:**
+- **JWT (JSON Web Tokens)** para autenticação stateless
+- **bcrypt** para hash seguro de senhas
+- **OAuth2PasswordBearer** para padrão de autenticação
+- **Middleware FastAPI** para proteção automática de rotas
 
 ## Cronograma de Entregas
 
-- [x] **AC1 - 14/09/2025** (Concluído)
+- [x] **AC1 - 14/09/2025** (Concluído) ✅
+  - **CRUD Completo de Eventos**
   - Estrutura básica do projeto (Frontend/Backend/Database)
-  - CRUD completo de eventos via API REST
+  - API REST com 3 endpoints principais
   - Configuração do ambiente de desenvolvimento
   - Documentação inicial e repositório GitHub
+  - **Status**: Sistema básico funcionando com persistência
 
-- [x] **AC2 - 12/10/2025** (Concluído)
-  - Sistema de filtros de busca de eventos
+- [x] **AC2 - 12/10/2025** (Concluído) ✅
+  - **Sistema de Filtros e Busca Avançada**
   - Filtros por título, localização e período de datas
   - API REST com documentação automática (Swagger UI)
   - Migração para banco SQLite para maior compatibilidade
   - Testes funcionais completos via interface web
+  - **Status**: Sistema de busca robusto e otimizado
 
-- [ ] **AC3 - 09/11/2025** (Próxima Entrega)
-  - Sistema de autenticação e autorização de usuários
-  - Interface frontend completa e integrada
+- [x] **AC3 - 09/11/2025** (Concluído) ✅
+  - **Sistema de Autenticação JWT**
+  - Registro e login de usuários funcionais
+  - Proteção de rotas sensíveis (criação de eventos)
+  - Hash seguro de senhas com bcrypt
+  - Middleware de autenticação integrado
+  - **Status**: Sistema seguro com controle de acesso
+
+- [ ] **Entrega Final - 30/11/2025** (Próxima Entrega) 🚀
+  - **Interface Frontend Completa**
+  - Interface de usuário integrada com backend
   - Validações avançadas de formulários
-
-- [ ] **Entrega Final - 30/11/2025** (Projeto Completo)
-  - Sistema completo integrado (Frontend + Backend + Database)
+  - Sistema completo funcionando end-to-end
   - Deploy e documentação final
   - Apresentação do projeto concluído
+  - **Meta**: Sistema completo pronto para produção
 
 ## Links Importantes
 
