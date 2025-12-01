@@ -2,9 +2,8 @@
 
 ![Linguagem](https://img.shields.io/badge/Backend-FastAPI-009688)
 ![Frontend](https://img.shields.io/badge/Frontend-React-61dafb)
-![Database](https://img.shields.io/badge/Database-SQLite-003b57)
-
-Este é um sistema de gerenciamento de eventos e workshops desenvolvido como projeto acadêmico para a disciplina de Projeto de Software.
+![Database](https://img.shields.io/badge/Database-SQL%20Server-CC2927)
+![Status](https://img.shields.io/badge/Status-Completo-success)
 
 ## Sobre o Projeto
 
@@ -13,18 +12,18 @@ Este projeto implementa um sistema completo de gerenciamento de eventos e worksh
 ### Arquitetura em 3 Camadas:
 - **Frontend**: React + Vite + Material-UI
 - **Backend**: FastAPI + SQLAlchemy + Pydantic  
-- **Banco de Dados**: SQLite (desenvolvimento) / SQL Server (produção)
+- **Banco de Dados**: SQL Server
 
 ### Funcionalidades Implementadas:
-- ✅ CRUD completo de eventos
-- ✅ Sistema de filtros e busca avançada
-- ✅ Sistema de autenticação JWT
-- ✅ Registro e login de usuários
-- ✅ Proteção de rotas com autenticação
-- ✅ API REST documentada automaticamente
-- ✅ Validação de dados robusta
-- 🔄 Interface de usuário (em desenvolvimento)
-- 🔄 Validações avançadas de formulários
+- ✅ **CRUD Completo de Eventos** - Criar, visualizar, editar e excluir eventos
+- ✅ **Sistema de Filtros e Busca Avançada** - Filtros por título, local e período
+- ✅ **Autenticação JWT Completa** - Login, registro, perfil e proteção de rotas
+- ✅ **Dashboard com Estatísticas** - Métricas em tempo real (ativos, passados, este mês)
+- ✅ **Modal de Visualização/Edição** - Interface intuitiva para gerenciar eventos
+- ✅ **Validações em Tempo Real** - Formulários com feedback imediato
+- ✅ **Interface Responsiva** - Design adaptativo para desktop e mobile
+- ✅ **API REST Documentada** - Swagger UI e ReDoc integrados
+- ✅ **Documentação Técnica** - Diagramas UML (Caso de Uso e Classes)
 
 ## Estrutura do Projeto
 
@@ -69,9 +68,11 @@ pip install -r requirements.txt
 
 4. Configurar variáveis de ambiente:
 Crie um arquivo `.env` na pasta backend com:
-```
+```env
 SQL_SERVER=localhost\\SQLEXPRESS
 SQL_DATABASE=eventos_db
+SQL_USERNAME=seu_usuario
+SQL_PASSWORD=sua_senha
 ```
 
 5. Iniciar o servidor de desenvolvimento:
@@ -112,11 +113,14 @@ npm run dev
 - `GET /api/events/` - Listar eventos com filtros opcionais
 - `POST /api/events/` - Criar novo evento (requer autenticação)
 - `GET /api/events/{id}` - Buscar evento específico por ID
+- `PUT /api/events/{id}` - Atualizar evento (requer autenticação)
+- `DELETE /api/events/{id}` - Excluir evento (requer autenticação)
 
 **Autenticação:**
 - `POST /api/auth/register` - Registrar novo usuário
 - `POST /api/auth/login` - Login de usuário (retorna JWT token)
 - `GET /api/auth/me` - Obter dados do usuário atual (requer autenticação)
+- `PUT /api/auth/profile` - Atualizar perfil do usuário (requer autenticação)
 
 ### Filtros Implementados:
 - **Título**: Busca parcial case-insensitive
@@ -136,7 +140,7 @@ npm run dev
 **✅ Funcionalidades Implementadas:**
 1. **Criar Evento** - `POST /api/events/`
    - Validação de dados com Pydantic
-   - Persistência no banco SQLite/SQL Server
+   - Persistência no banco SQL Server
    - Retorno do evento criado com ID
 
 2. **Listar Eventos** - `GET /api/events/`
@@ -153,7 +157,7 @@ npm run dev
 - **FastAPI** para API REST
 - **SQLAlchemy** para ORM
 - **Pydantic** para validação
-- **SQLite** para desenvolvimento
+- **SQL Server** para banco de dados
 
 #### **AC2 - Sistema de Filtros e Busca:**
 
@@ -208,6 +212,43 @@ npm run dev
 - **OAuth2PasswordBearer** para padrão de autenticação
 - **Middleware FastAPI** para proteção automática de rotas
 
+#### ** Entrega Final (Interface Completa e Documentação):**
+
+**✅ Funcionalidades Implementadas:**
+1. **Interface Frontend Completa**
+   - Dashboard com estatísticas em tempo real
+   - Modal de visualização/edição de eventos
+   - Sistema de filtros integrado
+
+2. **Validações Avançadas**
+   - Validação de formulários em tempo real
+   - Feedback visual de erros
+   - Mensagens personalizadas em português
+   - Validação de datas (início antes do fim)
+
+3. **Gerenciamento Completo de Eventos**
+   - Criação de eventos com validação
+   - Edição inline via modal
+   - Exclusão com confirmação
+
+4. **Sistema de Perfil**
+   - Visualização de dados do usuário
+   - Edição de perfil
+   - Menu dropdown no header
+   - Exibição de iniciais do usuário
+
+5. **Documentação Técnica**
+   - Diagrama de Caso de Uso completo (12 UCs)
+   - Diagrama de Classes detalhado (11 classes)
+
+**🔧 Tecnologias AC4:**
+- **React 19** para interface moderna
+- **Material-UI** para componentes
+- **TailwindCSS** para estilização
+- **Axios** com interceptors para API
+- **React Router** para navegação
+- **Mermaid** para diagramas UML
+
 ## Cronograma de Entregas
 
 - [x] **AC1 - 14/09/2025** (Concluído) ✅
@@ -222,7 +263,7 @@ npm run dev
   - **Sistema de Filtros e Busca Avançada**
   - Filtros por título, localização e período de datas
   - API REST com documentação automática (Swagger UI)
-  - Migração para banco SQLite para maior compatibilidade
+  - Integração completa com SQL Server
   - Testes funcionais completos via interface web
   - **Status**: Sistema de busca robusto e otimizado
 
@@ -234,16 +275,65 @@ npm run dev
   - Middleware de autenticação integrado
   - **Status**: Sistema seguro com controle de acesso
 
-- [ ] **Entrega Final - 30/11/2025** (Próxima Entrega) 🚀
-  - **Interface Frontend Completa**
-  - Interface de usuário integrada com backend
-  - Validações avançadas de formulários
-  - Sistema completo funcionando end-to-end
-  - Deploy e documentação final
-  - Apresentação do projeto concluído
-  - **Meta**: Sistema completo pronto para produção
+- [x] **Entrega Final - 30/11/2025** (Concluído) ✅
+  - **Sistema Completo Finalizado**
+  - Interface frontend totalmente integrada com backend
+  - Dashboard com estatísticas em tempo real
+  - Modal de visualização/edição de eventos
+  - Validações completas em todos os formulários
+  - Diagramas UML (Caso de Uso e Classes)
+  - Roteiro de demonstração documentado
+  - Sistema 100% funcional end-to-end
+  - **Status**: Projeto concluído e pronto para apresentação
 
-## Links Importantes
+## Documentação Técnica
 
-- [Repositório no GitHub](https://github.com/isisgoncalves/Piloto)
-- [Board do Projeto](https://github.com/users/isisgoncalves/projects/1/views/1)
+### Diagramas UML
+- 📊 [Diagrama de Caso de Uso](docs/diagrama-caso-de-uso.md) - 12 casos de uso documentados
+- 🏗️ [Diagrama de Classes](docs/diagrama-classes.md) - Arquitetura completa do sistema
+
+### Gerenciamento do Projeto
+- 📋 [Board do Projeto](https://github.com/users/isisgoncalves/projects/1/views/1) - Kanban com todas as issues
+- 🔗 [Repositório no GitHub](https://github.com/isisgoncalves/Piloto)
+
+## Tecnologias Utilizadas
+
+### Backend
+- **FastAPI** - Framework web moderno e rápido
+- **SQLAlchemy** - ORM para Python
+- **Pydantic** - Validação de dados
+- **JWT (PyJWT)** - Autenticação stateless
+- **bcrypt** - Hash seguro de senhas
+- **uvicorn** - Servidor ASGI
+- **pyodbc** - Conexão com SQL Server
+
+### Frontend
+- **React 19** - Biblioteca JavaScript
+- **Vite** - Build tool ultra-rápido
+- **Material-UI** - Componentes React
+- **React Router** - Roteamento SPA
+- **Axios** - Cliente HTTP
+- **TailwindCSS** - Estilização utility-first
+
+### Banco de Dados
+- **SQL Server** - Banco de dados relacional
+- **SQLAlchemy ORM** - Abstração de banco
+
+## Padrões de Projeto Utilizados
+
+- **MVC (Model-View-Controller)** - Separação de responsabilidades
+- **Service Layer** - Lógica de negócio isolada
+- **Repository Pattern** - Abstração de acesso a dados
+- **Dependency Injection** - Inversão de controle
+- **JWT Authentication** - Autenticação stateless
+
+## Autoria
+
+**Aluna**: Isis Gonçalves Soares
+**Disciplina**: Projeto de Software  
+**Instituição**: Faculdade Impacta  
+**Período**: 2025
+
+## Licença
+
+Este projeto foi desenvolvido para fins acadêmicos na disciplina de Projeto de Software.

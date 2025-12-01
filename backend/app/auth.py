@@ -5,9 +5,9 @@ from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from backend.app.database import get_db
-from backend.app.models.user import User
-from backend.app.schemas.user import TokenData
+from app.database import get_db
+from app.models.user import User
+from app.schemas.user import TokenData
 
 # Configurações
 SECRET_KEY = "sua-chave-secreta-super-forte-aqui-change-in-production"
@@ -61,8 +61,8 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         if email is None:
             raise credentials_exception
         token_data = TokenData(email=email)
-    except JWTError:
-        raise credentials_exception
+    except JWTError as exc:
+        raise credentials_exception from exc
     
     user = db.query(User).filter(User.email == token_data.email).first()
     if user is None:

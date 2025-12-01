@@ -28,3 +28,6 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
+
+class UserUpdate(BaseModel):
+    full_name: str
